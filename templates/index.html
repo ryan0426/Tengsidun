@@ -1,0 +1,436 @@
+<!-- main/templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            background-color: #f8f8f8;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+        }
+        .drawer {
+            position: relative;
+            display: inline-block;
+        }
+        .drawer-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            padding: 12px 16px;
+            z-index: 1;
+            white-space: nowrap;
+        }
+        .drawer:hover .drawer-content {
+            display: block;
+        }
+        .drawer a {
+            display: block;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 40px; /* Adjust size as needed */
+            margin-right: 10px;
+        }
+        .logo span {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Adjust width as needed */
+            height: 400px; /* Set a fixed height */
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        .carousel-inner {
+            display: flex;
+            transition: transform 1s ease-in-out;
+            height: 100%;
+        }
+        .carousel img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Ensure the whole image is visible */
+            flex-shrink: 0;
+        }
+        .carousel .prev, .carousel .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        .carousel .prev {
+            left: 10px;
+        }
+        .carousel .next {
+            right: 10px;
+        }
+        .carousel .prev:hover, .carousel .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .carousel-dots {
+            text-align: center;
+            padding: 10px;
+        }
+        .carousel-dots span {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 5px;
+            background-color: #ccc;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .carousel-dots span.active {
+            background-color: #333;
+        }        
+
+        .content {
+            padding: 40px 20px;
+            background-color: #f4f4f4;
+            margin: 0 10%;
+        }
+        .section {
+            margin-bottom: 60px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .section h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .section h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+        .image-grid img {
+            width: 100%;
+            height: 200px; 
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .image-caption {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #555;
+        }
+        .single-image {
+            display: flex;
+            justify-content: center; 
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .single-image img {
+            width: 60%;
+            height: auto; 
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .single-image .image-caption {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .contact-info {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-top: 4px solid #555;
+        }
+        .contact-info p {
+            margin: 10px 0;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .contact-info .space {
+            margin-top: 20px;
+        }        
+        
+    </style>
+</head>
+<body>
+
+<div class="header">
+    {% load static %}
+    <div class="logo">
+        <img src="{% static 'images/logo.png' %}" alt="Company Logo">
+        <span>大连腾斯顿工业有限公司</span>
+    </div>
+    <div>
+        <a href="{% url 'index' %}">首页</a>
+        <div class="drawer">
+            <a href="{% url 'about' %}">关于我们</a>
+            <div class="drawer-content">
+                <a href="{% url 'about' %}#dalian-introduction">大连腾斯顿介绍</a>
+                <a href="{% url 'about' %}#xinsheng-introduction">新生工业（株）介绍</a>
+                <a href="{% url 'about' %}#xinsheng-history">新生工厂史变迁史</a>
+            </div>
+        </div>
+        <div class="drawer">
+            <a href="{% url 'index' %}#production-equipment">设备</a>
+            <div class="drawer-content">
+                <a href="{% url 'index' %}#production-equipment">生产设备</a>
+                <a href="{% url 'index' %}#inspection-equipment">检测设备</a>
+            </div>
+        </div>
+        <div class="drawer">
+            <a href="{% url 'index' %}#product-categories">新生产品分类</a>
+            <div class="drawer-content">
+                <a href="{% url 'dies' %}">DIES</a>
+                <a href="{% url 'wear_parts' %}">WEAR PARTS</a>
+                <a href="{% url 'heading_dies' %}">HEADING DIES</a>
+                <a href="{% url 'bit' %}">BIT</a>
+                <a href="{% url 'rod' %}">ROD</a>
+                <a href="{% url 'cutting_tool' %}">CUTTING TOOL</a>
+                <a href="{% url 'cutter' %}">CUTTER</a>
+                <a href="{% url 'ram_pot' %}">RAM/POT</a>
+                <a href="{% url 'non_magnetic' %}">NON-MAGNETIC</a>
+                <a href="{% url 'precision_mold' %}">PRECISION MOLD</a>
+                <a href="{% url 'other_tools' %}">OTHER TOOLS</a>
+            </div>
+        </div>
+        <div class="drawer">
+            <a href="{% url 'tech_info' %}">技术情报</a>
+            <div class="drawer-content">
+                <a href="{% url 'tech_info' %}#manufacturing-process">制造工序</a>
+                <a href="{% url 'tech_info' %}#material-chart">材质表</a>
+                <a href="{% url 'tech_info' %}#material-characteristics">材种特点</a>
+                <a href="{% url 'tech_info' %}#material-applications">材种应用</a>
+            </div>
+        </div>
+        <div class="drawer">
+            <a href="{% url 'news' %}">交流动态</a>
+            <div class="drawer-content">
+                <a href="{% url 'news' %}#shenzhen-exhibition">2023年深圳展会照片</a>
+                <a href="{% url 'news' %}#shanghai-exhibition">2024年上海展会照片</a>
+            </div>
+        </div>
+        <a href="#contact-info">联系我们</a>
+    </div>
+</div>
+
+<div class="carousel">
+    <div class="carousel-inner">
+        <img src="{% static 'images/pic1.png' %}" alt="Image 1" class="active">
+        <img src="{% static 'images/pic2.png' %}" alt="Image 2">
+    </div>
+    <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+    <button class="next" onclick="changeSlide(1)">&#10095;</button>
+</div>
+<div class="carousel-dots">
+    <span onclick="currentSlide(1)" class="active"></span>
+    <span onclick="currentSlide(2)"></span>
+</div>
+
+<div class="content">
+    <div id="production-equipment" class="section">
+        <h2>生产设备</h2>
+        <div class="sub-section">
+            <h3>主要生产设备</h3>
+            <div class="image-grid">
+                <div>
+                    <img src="{% static 'images/Spray Dryer.png' %}" alt="Spray Dryer">
+                    <div class="image-caption">Spray Dryer</div>
+                </div>
+                <div>
+                    <img src="{% static 'images/Sinter HIP.png' %}" alt="Sinter HIP">
+                    <div class="image-caption">Sinter HIP</div>
+                </div>
+                <div>
+                    <img src="{% static 'images/Dry CIP.png' %}" alt="Dry CIP">
+                    <div class="image-caption">Dry CIP</div>
+                </div>
+                <div>
+                    <img src="{% static 'images/MCT.png' %}" alt="MCT">
+                    <div class="image-caption">MCT</div>
+                </div>
+                <div>
+                    <img src="{% static 'images/雕刻机.png' %}" alt="雕刻机">
+                    <div class="image-caption">雕刻机</div>
+                </div>
+                <div>
+                    <img src="{% static 'images/真空预烧结炉.png' %}" alt="真空预烧结炉">
+                    <div class="image-caption">真空预烧结炉</div>
+                </div>
+            </div>
+        </div>
+        <div class="sub-section">
+            <h3>各道工艺的生产能力</h3>
+            <div class="single-image">
+                <img src="{% static 'images/各道工艺的生产能力.png' %}" alt="Process Capability">
+            </div>
+        </div>
+    </div>
+
+    <div id="inspection-equipment" class="section"> 
+        <h2>检测设备</h2>
+        <div class="single-image">
+            <img src="{% static 'images/电子显微镜.png' %}" alt="Main Inspection Equipment">
+        </div>  
+        <div class="sub-section">
+            <h3>检测/分析设备 Line up</h3>
+            <div class="single-image">
+                <img src="{% static 'images/lineup.png' %}" alt="检测/分析设备 Line up">
+            </div> 
+        </div>
+    </div>
+</div>
+
+<div class="content"> <!-- New content div for 新生产品分类 -->
+    <div id="product-categories" class="section">
+        <h2>新生产品分类</h2>
+        <div class="image-grid">
+            <div>
+                <a href="{% url 'dies' %}">
+                    <img src="{% static 'images/dies.png' %}" alt="DIES">
+                    <div class="image-caption">DIES</div>
+                </a>
+            </div>
+            <div>
+                <a href="{% url 'wear_parts' %}">
+                    <img src="{% static 'images/wear_parts.png' %}" alt="WEAR PARTS">
+                    <div class="image-caption">WEAR PARTS</div>
+                </a>
+            </div>
+            <div>
+                <a href="{% url 'heading_dies' %}">
+                    <img src="{% static 'images/heading_dies.png' %}" alt="HEADING DIES">
+                    <div class="image-caption">HEADING DIES</div>
+                </a>
+            </div>
+            <div>
+                <a href="{% url 'bit' %}">
+                    <img src="{% static 'images/bit.png' %}" alt="BIT">
+                    <div class="image-caption">BIT</div>
+                </a>
+            </div>
+            <div>
+                <a href="{% url 'rod' %}">
+                    <img src="{% static 'images/rod.png' %}" alt="ROD">
+                    <div class="image-caption">ROD</div>
+                </a>
+            </div>
+            <div>
+                <a href="{% url 'cutting_tool' %}">
+                    <img src="{% static 'images/cutting_tool.png' %}" alt="CUTTING TOOL">
+                    <div class="image-caption">CUTTING TOOL</div>
+                </a>
+            </div>
+            <div>
+                <a href="{% url 'cutter' %}">
+                    <img src="{% static 'images/cutter.png' %}" alt="CUTTER">
+                    <div class="image-caption">CUTTER</div>
+                </a>
+            </div>
+            <div>
+                <a href="{% url 'ram_pot' %}">
+                    <img src="{% static 'images/ram_pot.png' %}" alt="RAM/POT">
+                    <div class="image-caption">RAM/POT</div>
+                </a>
+            </div>
+            <div>
+                <a href="{% url 'non_magnetic' %}">
+                    <img src="{% static 'images/non-magnetic.png' %}" alt="NON-MAGNETIC">
+                    <div class="image-caption">NON-MAGNETIC</div>
+                </a>
+            </div>
+            <div>
+                <a href="{% url 'precision_mold' %}">
+                    <img src="{% static 'images/precision_mold.png' %}" alt="PRECISION MOLD">
+                    <div class="image-caption">PRECISION MOLD</div>
+                </a>
+            </div>
+            <div>
+                <a href="{% url 'other_tools' %}">
+                    <img src="{% static 'images/other_tools.png' %}" alt="OTHER TOOLS">
+                    <div class="image-caption">OTHER TOOLS</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Information Section -->
+<div id= "contact-info" class="contact-info">
+    <p>大连市中山区安乐街28号北方商务楼503室</p>
+    <p>TEL：0411-86986589，13998614815，13775155813</p>
+    <p class="space">深圳办公室</p>
+    <p>深圳市罗湖区红岗路龙园大厦810室</p>
+    <p>TEL：0755-83545232，13302311690</p>
+</div>
+
+<script>
+    let currentIndex = 0;
+    const images = document.querySelectorAll('.carousel img');
+    const dots = document.querySelectorAll('.carousel-dots span');
+    const totalImages = images.length;
+
+    function showSlide(index) {
+        images.forEach((img, i) => {
+            img.style.display = (i === index) ? 'block' : 'none';
+            dots[i].classList.remove('active');
+        });
+        dots[index].classList.add('active');
+    }
+
+    function changeSlide(n) {
+        currentIndex = (currentIndex + n + totalImages) % totalImages;
+        showSlide(currentIndex);
+    }
+
+    function currentSlide(n) {
+        currentIndex = n - 1;
+        showSlide(currentIndex);
+    }
+
+    setInterval(() => {
+        changeSlide(1);
+    }, 5000);
+
+    document.addEventListener('DOMContentLoaded', function() {
+        showSlide(currentIndex);
+    });
+</script>
+
+</body>
+</html>
