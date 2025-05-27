@@ -7,6 +7,7 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('tech-info/', views.tech_info, name='tech_info'),
     path('news/', views.news, name='news'),
+    path('testing_equip/', views.testing_equip_view, name='testing_equip'),
     path('categories/dies/', views.dies_view, name='dies'),
     path('categories/wear_parts/', views.wear_parts_view, name='wear_parts'),
     path('categories/heading_dies/', views.heading_dies_view, name='heading_dies'),
@@ -18,4 +19,10 @@ urlpatterns = [
     path('categories/non_magnetic/', views.non_magnetic_view, name='non_magnetic'),
     path('categories/precision_mold/', views.precision_mold_view, name='precision_mold'),
     path('categories/other_tools/', views.other_tools_view, name='other_tools'),
+
+    path('categories/precision/', views.precision_view, name='category_precision'),
+    path('categories/forging/', views.forging_view, name='category_forging'),
+    path('categories/cutting/', views.cutting_view, name='category_cutting'),
+    path('categories/mining/', views.mining_view, name='category_mining'),
+    path('categories/rollers/', views.rollers_view, name='category_rollers'),
 ]

@@ -54,25 +54,28 @@
         }
 
         .carousel {
-            position: relative;
-            width: 100%;
-            height: auto; /* Set a fixed height */
-            margin: 20px 0;
-            overflow: hidden;
-            border-radius: 10px; /* Rounded corners */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        position: relative;
+        width: 100vw;   /* Full screen width */
+        max-width: 100%; 
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        margin: 20px 0;
         }
+
         .carousel-inner {
-            display: flex;
-            transition: transform 1s ease-in-out;
-            height: 100%;
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        width: 100%; /* Will be overridden in JS */
         }
+
         .carousel img {
-            width: 100%;
-            height: auto;
-            object-fit: cover; /* Ensure the whole image is visible */
-            flex-shrink: 0;
+        width: 100vw;  /* Match viewport width */
+        height: auto;
+        object-fit: cover;
+        flex-shrink: 0;
         }
+
         .carousel .prev, .carousel .next {
             position: absolute;
             top: 50%;
@@ -141,8 +144,8 @@
             text-align: center;
         }
         .image-grid img {
-            width: 100%;
-            height: auto; 
+            width: 220px;
+            height: 220px; 
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
@@ -192,7 +195,7 @@
 <div class="header">
     {% load static %}
     <div class="logo">
-        <img src="{% static 'images/logo.png' %}" alt="Company Logo">
+        <img src="http://cdn.dltungsten.com//logo.png" alt="Company Logo">
         <span>大连腾斯顿工业有限公司</span>
     </div>
     <div>
@@ -209,23 +212,17 @@
             <a href="{% url 'index' %}#production-equipment">设备</a>
             <div class="drawer-content">
                 <a href="{% url 'index' %}#production-equipment">生产设备</a>
-                <a href="{% url 'index' %}#inspection-equipment">检测设备</a>
+                <a href="{% url 'testing_equip' %}">检测设备</a>
             </div>
         </div>
         <div class="drawer">
             <a href="{% url 'index' %}#product-categories">新生产品分类</a>
             <div class="drawer-content">
-                <a href="{% url 'dies' %}">DIES</a>
-                <a href="{% url 'wear_parts' %}">WEAR PARTS</a>
-                <a href="{% url 'heading_dies' %}">HEADING DIES</a>
-                <a href="{% url 'bit' %}">BIT</a>
-                <a href="{% url 'rod' %}">ROD</a>
-                <a href="{% url 'cutting_tool' %}">CUTTING TOOL</a>
-                <a href="{% url 'cutter' %}">CUTTER</a>
-                <a href="{% url 'ram_pot' %}">RAM/POT</a>
-                <a href="{% url 'non_magnetic' %}">NON-MAGNETIC</a>
-                <a href="{% url 'precision_mold' %}">PRECISION MOLD</a>
-                <a href="{% url 'other_tools' %}">OTHER TOOLS</a>
+                <a href="{% url 'category_precision' %}">精密模具</a>
+                <a href="{% url 'category_forging' %}">锻造、粉末模具</a>
+                <a href="{% url 'category_cutting' %}">切削工具</a>
+                <a href="{% url 'category_mining' %}">矿山用</a>
+                <a href="{% url 'category_rollers' %}">辊轴及拉伸模</a>
             </div>
         </div>
         <div class="drawer">
@@ -250,8 +247,8 @@
 
 <div class="carousel">
     <div class="carousel-inner">
-        <img src="{% static 'images/banner1.png' %}" alt="Image 1" class="active">
-        <img src="{% static 'images/banner2.png' %}" alt="Image 2">
+        <img src="http://cdn.dltungsten.com/banner1.png" alt="Image 1" class="active">
+        <img src="http://cdn.dltungsten.com/banner2.png" alt="Image 2">
     </div>
     <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
     <button class="next" onclick="changeSlide(1)">&#10095;</button>
@@ -268,31 +265,31 @@
             <h3>主要生产设备</h3>
             <div class="image-grid">
                 <div>
-                    <img src="{% static 'images/sinter_hip_10mpa.png' %}" alt="Sinter HIP 10MPa">
+                    <img src="http://cdn.dltungsten.com//sinter_hip_10mpa.png" alt="Sinter HIP 10MPa">
                     <div class="image-caption">Sinter HIP(10MPa)</div>
                 </div>
                 <div>
-                    <img src="{% static 'images/Spray Dryer.png' %}" alt="Spray Dryer">
+                    <img src="http://cdn.dltungsten.com//Spray Dryer.png" alt="Spray Dryer">
                     <div class="image-caption">Spray Dryer</div>
                 </div>
                 <div>
-                    <img src="{% static 'images/Sinter HIP.png' %}" alt="Sinter HIP">
+                    <img src="http://cdn.dltungsten.com/Sinter HIP.png" alt="Sinter HIP">
                     <div class="image-caption">Sinter HIP</div>
                 </div>
                 <div>
-                    <img src="{% static 'images/Dry CIP.png' %}" alt="Dry CIP">
+                    <img src="http://cdn.dltungsten.com/Dry CIP.png" alt="Dry CIP">
                     <div class="image-caption">Dry CIP</div>
                 </div>
                 <div>
-                    <img src="{% static 'images/MCT.png' %}" alt="MCT">
+                    <img src="http://cdn.dltungsten.com/MCT.png" alt="MCT">
                     <div class="image-caption">MCT</div>
                 </div>
                 <div>
-                    <img src="{% static 'images/雕刻机.png' %}" alt="雕刻机">
+                    <img src="http://cdn.dltungsten.com/雕刻机.png" alt="雕刻机">
                     <div class="image-caption">雕刻机</div>
                 </div>
                 <div>
-                    <img src="{% static 'images/真空预烧结炉.png' %}" alt="真空预烧结炉">
+                    <img src="http://cdn.dltungsten.com/真空预烧结炉.png" alt="真空预烧结炉">
                     <div class="image-caption">真空预烧结炉</div>
                 </div>
             </div>
@@ -300,21 +297,8 @@
         <div class="sub-section">
             <h3>各道工艺的生产能力</h3>
             <div class="single-image">
-                <img src="{% static 'images/各道工艺的生产能力.png' %}" alt="Process Capability">
+                <img src="http://cdn.dltungsten.com/各道工艺的生产能力.png" alt="Process Capability">
             </div>
-        </div>
-    </div>
-
-    <div id="inspection-equipment" class="section"> 
-        <h2>检测设备</h2>
-        <div class="single-image">
-            <img src="{% static 'images/电子显微镜.png' %}" alt="Main Inspection Equipment">
-        </div>  
-        <div class="sub-section">
-            <h3>检测/分析设备 Line up</h3>
-            <div class="single-image">
-                <img src="{% static 'images/lineup.png' %}" alt="检测/分析设备 Line up">
-            </div> 
         </div>
     </div>
 </div>
@@ -324,69 +308,33 @@
         <h2>新生产品分类</h2>
         <div class="image-grid">
             <div>
-                <a href="{% url 'dies' %}">
-                    <img src="{% static 'images/dies.png' %}" alt="DIES">
-                    <div class="image-caption">DIES</div>
+                <a href="{% url 'category_precision' %}">
+                    <img src="http://cdn.dltungsten.com/precision.png" alt="PRECISION">
+                    <div class="image-caption">精密模具</div>
                 </a>
             </div>
             <div>
-                <a href="{% url 'wear_parts' %}">
-                    <img src="{% static 'images/wear_parts.png' %}" alt="WEAR PARTS">
-                    <div class="image-caption">WEAR PARTS</div>
+                <a href="{% url 'category_forging' %}">
+                    <img src="http://cdn.dltungsten.com/forging.png" alt="FORGING">
+                    <div class="image-caption">锻造、粉末模具</div>
                 </a>
             </div>
             <div>
-                <a href="{% url 'heading_dies' %}">
-                    <img src="{% static 'images/heading_dies.png' %}" alt="HEADING DIES">
-                    <div class="image-caption">HEADING DIES</div>
+                <a href="{% url 'category_cutting' %}">
+                    <img src="http://cdn.dltungsten.com/cutting.png" alt="CUTTING">
+                    <div class="image-caption">切削工具</div>
                 </a>
             </div>
             <div>
-                <a href="{% url 'bit' %}">
-                    <img src="{% static 'images/bit.png' %}" alt="BIT">
-                    <div class="image-caption">BIT</div>
+                <a href="{% url 'category_mining' %}">
+                    <img src="http://cdn.dltungsten.com/mining.png" alt="MINING">
+                    <div class="image-caption">矿山用</div>
                 </a>
             </div>
             <div>
-                <a href="{% url 'rod' %}">
-                    <img src="{% static 'images/rod.png' %}" alt="ROD">
-                    <div class="image-caption">ROD</div>
-                </a>
-            </div>
-            <div>
-                <a href="{% url 'cutting_tool' %}">
-                    <img src="{% static 'images/cutting_tool.png' %}" alt="CUTTING TOOL">
-                    <div class="image-caption">CUTTING TOOL</div>
-                </a>
-            </div>
-            <div>
-                <a href="{% url 'cutter' %}">
-                    <img src="{% static 'images/cutter.png' %}" alt="CUTTER">
-                    <div class="image-caption">CUTTER</div>
-                </a>
-            </div>
-            <div>
-                <a href="{% url 'ram_pot' %}">
-                    <img src="{% static 'images/ram_pot.png' %}" alt="RAM/POT">
-                    <div class="image-caption">RAM/POT</div>
-                </a>
-            </div>
-            <div>
-                <a href="{% url 'non_magnetic' %}">
-                    <img src="{% static 'images/non-magnetic.png' %}" alt="NON-MAGNETIC">
-                    <div class="image-caption">NON-MAGNETIC</div>
-                </a>
-            </div>
-            <div>
-                <a href="{% url 'precision_mold' %}">
-                    <img src="{% static 'images/precision_mold.png' %}" alt="PRECISION MOLD">
-                    <div class="image-caption">PRECISION MOLD</div>
-                </a>
-            </div>
-            <div>
-                <a href="{% url 'other_tools' %}">
-                    <img src="{% static 'images/other_tools.png' %}" alt="OTHER TOOLS">
-                    <div class="image-caption">OTHER TOOLS</div>
+                <a href="{% url 'category_rollers' %}">
+                    <img src="http://cdn.dltungsten.com/roller.png" alt="ROLLER">
+                    <div class="image-caption">辊轴及拉伸模</div>
                 </a>
             </div>
         </div>
@@ -405,35 +353,48 @@
 <script>
     let currentIndex = 0;
     const images = document.querySelectorAll('.carousel img');
+    const inner = document.querySelector('.carousel-inner');
     const dots = document.querySelectorAll('.carousel-dots span');
     const totalImages = images.length;
-
-    function showSlide(index) {
-        images.forEach((img, i) => {
-            img.style.display = (i === index) ? 'block' : 'none';
-            dots[i].classList.remove('active');
+  
+    function updateCarouselWidth() {
+        const viewportWidth = window.innerWidth;
+        inner.style.width = `${viewportWidth * totalImages}px`;
+        images.forEach(img => {
+            img.style.width = `${viewportWidth}px`;
         });
-        dots[index].classList.add('active');
     }
-
+  
+    function showSlide(index) {
+        const viewportWidth = window.innerWidth;
+        inner.style.transform = `translateX(-${index * viewportWidth}px)`;
+        dots.forEach(dot => dot.classList.remove('active'));
+        if (dots[index]) dots[index].classList.add('active');
+    }
+  
     function changeSlide(n) {
         currentIndex = (currentIndex + n + totalImages) % totalImages;
         showSlide(currentIndex);
     }
-
+  
     function currentSlide(n) {
         currentIndex = n - 1;
         showSlide(currentIndex);
     }
-
-    setInterval(() => {
-        changeSlide(1);
-    }, 5000);
-
-    document.addEventListener('DOMContentLoaded', function() {
+  
+    window.addEventListener('resize', () => {
+        updateCarouselWidth();
         showSlide(currentIndex);
     });
-</script>
+  
+    document.addEventListener('DOMContentLoaded', () => {
+        updateCarouselWidth();
+        showSlide(currentIndex);
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+    });
+  </script>
 
 </body>
 </html>

@@ -46,3 +46,21 @@ def precision_mold_view(request):
 
 def other_tools_view(request):
     return render(request, 'categories/other_tools.html')
+
+def precision_view(request):
+    return render(request, 'categories/precision.html')
+
+def forging_view(request):
+    return render(request, 'categories/forging.html')
+
+def cutting_view(request):
+    return render(request, 'categories/cutting.html')
+
+def mining_view(request):
+    return render(request, 'categories/mining.html')
+
+def rollers_view(request):
+    return render(request, 'categories/rollers.html')
+
+def testing_equip_view(request):
+    return render(request, 'testing_equip.html')

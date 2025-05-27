@@ -1,10 +1,10 @@
-<!-- main/templates/tech_info.html -->
+<!-- main/templates/news.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>技术情报</title>
+    <title>交流动态</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -52,7 +52,6 @@
             font-size: 24px;
             font-weight: bold;
         }
-
         .carousel {
         position: relative;
         width: 100vw;   /* Full screen width */
@@ -112,7 +111,6 @@
             background-color: #333;
         }
 
-
         .content {
             padding: 40px 20px;
             background-color: #D3D3D3;
@@ -139,13 +137,13 @@
         }
         .image-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             text-align: center;
         }
         .image-grid img {
             width: 100%;
-            height: 150px; 
+            height: auto; 
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
@@ -258,31 +256,16 @@
 </div>
 
 <div class="content">
-    <div id="manufacturing-process" class="section">
-        <h2>制造工序</h2>
+    <div id="inspection-equipment" class="section"> 
+        <h2>检测设备</h2>
         <div class="single-image">
-            <img src="http://cdn.dltungsten.com/manufacturing-process.png" alt="制造工序">
-        </div>
-    </div>
-
-    <div id="material-chart" class="section">
-        <h2>材质表</h2>
-        <div class="single-image">
-            <img src="http://cdn.dltungsten.com/material-chart.png" alt="材质表">
-        </div>
-    </div>
-
-    <div id="material-characteristics" class="section">
-        <h2>材种特点</h2>
-        <div class="single-image">
-            <img src="http://cdn.dltungsten.com/material-characteristics.png" alt="材种特点">
-        </div>
-    </div>
-
-    <div id="material-applications" class="section">
-        <h2>材种应用</h2>
-        <div class="single-image">
-            <img src="http://cdn.dltungsten.com/material-applications.png" alt="材种应用">
+            <img src="http://cdn.dltungsten.com/电子显微镜.png" alt="Main Inspection Equipment">
+        </div>  
+        <div class="sub-section">
+            <h3>检测/分析设备 Line up</h3>
+            <div class="single-image">
+                <img src="http://cdn.dltungsten.com/lineup.png" alt="检测/分析设备 Line up">
+            </div> 
         </div>
     </div>
 </div>

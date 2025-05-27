@@ -53,24 +53,26 @@
             font-weight: bold;
         }
         .carousel {
-            position: relative;
-            width: 100%;
-            height: auto; /* Set a fixed height */
-            margin: 20px 0;
-            overflow: hidden;
-            border-radius: 10px; /* Rounded corners */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        position: relative;
+        width: 100vw;   /* Full screen width */
+        max-width: 100%; 
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        margin: 20px 0;
         }
+
         .carousel-inner {
-            display: flex;
-            transition: transform 1s ease-in-out;
-            height: 100%;
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        width: 100%; /* Will be overridden in JS */
         }
+
         .carousel img {
-            width: 100%;
-            height: auto;
-            object-fit: cover; /* Ensure the whole image is visible */
-            flex-shrink: 0;
+        width: 100vw;  /* Match viewport width */
+        height: auto;
+        object-fit: cover;
+        flex-shrink: 0;
         }
         .carousel .prev, .carousel .next {
             position: absolute;
@@ -190,7 +192,7 @@
 <div class="header">
     {% load static %}
     <div class="logo">
-        <img src="{% static 'images/logo.png' %}" alt="Company Logo">
+        <img src="http://cdn.dltungsten.com/logo.png" alt="Company Logo">
         <span>大连腾斯顿工业有限公司</span>
     </div>
     <div>
@@ -207,23 +209,17 @@
             <a href="{% url 'index' %}#production-equipment">设备</a>
             <div class="drawer-content">
                 <a href="{% url 'index' %}#production-equipment">生产设备</a>
-                <a href="{% url 'index' %}#inspection-equipment">检测设备</a>
+                <a href="{% url 'testing_equip' %}">检测设备</a>
             </div>
         </div>
         <div class="drawer">
             <a href="{% url 'index' %}#product-categories">新生产品分类</a>
             <div class="drawer-content">
-                <a href="{% url 'dies' %}">DIES</a>
-                <a href="{% url 'wear_parts' %}">WEAR PARTS</a>
-                <a href="{% url 'heading_dies' %}">HEADING DIES</a>
-                <a href="{% url 'bit' %}">BIT</a>
-                <a href="{% url 'rod' %}">ROD</a>
-                <a href="{% url 'cutting_tool' %}">CUTTING TOOL</a>
-                <a href="{% url 'cutter' %}">CUTTER</a>
-                <a href="{% url 'ram_pot' %}">RAM/POT</a>
-                <a href="{% url 'non_magnetic' %}">NON-MAGNETIC</a>
-                <a href="{% url 'precision_mold' %}">PRECISION MOLD</a>
-                <a href="{% url 'other_tools' %}">OTHER TOOLS</a>
+                <a href="{% url 'category_precision' %}">精密模具</a>
+                <a href="{% url 'category_forging' %}">锻造、粉末模具</a>
+                <a href="{% url 'category_cutting' %}">切削工具</a>
+                <a href="{% url 'category_mining' %}">矿山用</a>
+                <a href="{% url 'category_rollers' %}">辊轴及拉伸模</a>
             </div>
         </div>
         <div class="drawer">
@@ -248,8 +244,8 @@
 
 <div class="carousel">
     <div class="carousel-inner">
-        <img src="{% static 'images/banner1.png' %}" alt="Image 1" class="active">
-        <img src="{% static 'images/banner2.png' %}" alt="Image 2">
+        <img src="http://cdn.dltungsten.com/banner1.png" alt="Image 1" class="active">
+        <img src="http://cdn.dltungsten.com/banner2.png" alt="Image 2">
     </div>
     <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
     <button class="next" onclick="changeSlide(1)">&#10095;</button>
@@ -264,15 +260,15 @@
         <h2>2023年深圳展会照片</h2>
         <div class="image-grid">
             <div>
-                <img src="{% static 'images/Shenzhen1.png' %}" alt="Shenzhen 1">
+                <img src="http://cdn.dltungsten.com/Shenzhen1.png" alt="Shenzhen 1">
                 <div class="image-caption">Shenzhen 1</div>
             </div>
             <div>
-                <img src="{% static 'images/Shenzhen2.png' %}" alt="Shenzhen 2">
+                <img src="http://cdn.dltungsten.com/Shenzhen2.png" alt="Shenzhen 2">
                 <div class="image-caption">Shenzhen 2</div>
             </div>
             <div>
-                <img src="{% static 'images/Shenzhen3.png' %}" alt="Shenzhen 3">
+                <img src="http://cdn.dltungsten.com/Shenzhen3.png" alt="Shenzhen 3">
                 <div class="image-caption">Shenzhen 3</div>
             </div>
             
@@ -283,15 +279,15 @@
         <h2>2024年上海展会照片</h2>
         <div class="image-grid">
             <div>
-                <img src="{% static 'images/Shanghai1.png' %}" alt="Shanghai 1">
+                <img src="http://cdn.dltungsten.com/Shanghai1.png" alt="Shanghai 1">
                 <div class="image-caption">Shanghai 1</div>
             </div>
             <div>
-                <img src="{% static 'images/Shanghai2.png' %}" alt="Shanghai 2">
+                <img src="http://cdn.dltungsten.com/Shanghai2.png" alt="Shanghai 2">
                 <div class="image-caption">Shanghai 2</div>
             </div>
             <div>
-                <img src="{% static 'images/Shanghai3.png' %}" alt="Shanghai 3">
+                <img src="http://cdn.dltungsten.com/Shanghai3.png" alt="Shanghai 3">
                 <div class="image-caption">Shanghai 3</div>
             </div>
             
@@ -311,35 +307,48 @@
 <script>
     let currentIndex = 0;
     const images = document.querySelectorAll('.carousel img');
+    const inner = document.querySelector('.carousel-inner');
     const dots = document.querySelectorAll('.carousel-dots span');
     const totalImages = images.length;
-
-    function showSlide(index) {
-        images.forEach((img, i) => {
-            img.style.display = (i === index) ? 'block' : 'none';
-            dots[i].classList.remove('active');
+  
+    function updateCarouselWidth() {
+        const viewportWidth = window.innerWidth;
+        inner.style.width = `${viewportWidth * totalImages}px`;
+        images.forEach(img => {
+            img.style.width = `${viewportWidth}px`;
         });
-        dots[index].classList.add('active');
     }
-
+  
+    function showSlide(index) {
+        const viewportWidth = window.innerWidth;
+        inner.style.transform = `translateX(-${index * viewportWidth}px)`;
+        dots.forEach(dot => dot.classList.remove('active'));
+        if (dots[index]) dots[index].classList.add('active');
+    }
+  
     function changeSlide(n) {
         currentIndex = (currentIndex + n + totalImages) % totalImages;
         showSlide(currentIndex);
     }
-
+  
     function currentSlide(n) {
         currentIndex = n - 1;
         showSlide(currentIndex);
     }
-
-    setInterval(() => {
-        changeSlide(1);
-    }, 5000);
-
-    document.addEventListener('DOMContentLoaded', function() {
+  
+    window.addEventListener('resize', () => {
+        updateCarouselWidth();
         showSlide(currentIndex);
     });
-</script>
+  
+    document.addEventListener('DOMContentLoaded', () => {
+        updateCarouselWidth();
+        showSlide(currentIndex);
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+    });
+  </script>
 
 </body>
 </html>
